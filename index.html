@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piggi</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <header class="app-header">
+            <h1 class="app-title">Piggi</h1>
+            <div class="profile-avatar" id="profile-trigger" style="cursor: pointer;">M</div>
+        </header>
+
+        <div class="fade-overlay-top"></div>
+
+        <main class="content-area" id="content-area">
+
+            <div class="tr-card" id="bilanz-card">
+                <span class="card-label">Balance</span>
+                <h1 class="total-amount" id="main-balance-value">0.00€</h1>
+            </div>
+
+            <div class="tr-card" id="sparziele-card">
+                <span class="card-label">Savings Goals</span>
+                <div class="goals-list" id="main-goals-list">
+                </div>
+            </div>
+
+            <div class="tr-card" id="smart-card">
+                <span class="card-label">PiggiAI</span>
+                <div class="smart-content">
+                    <p class="smart-text">Coming soon...</p>
+                </div>
+            </div>
+
+            <div class="tr-card" id="einnahmen-card">
+                <span class="card-label">Income</span>
+                <div class="income-list" id="main-income-list">
+                </div>
+            </div>
+
+            <div class="tr-card" id="ausgaben-card">
+                <span class="card-label">Expenses</span>
+                <div class="expense-list" id="main-expense-list">
+                </div>
+            </div>
+
+        </main>
+
+        <div class="fade-overlay-bottom"></div>
+
+        <footer class="app-footer">
+            <div class="input-bar-container">
+
+                <textarea id="main-input" placeholder="PiggiAI" rows="1" autocomplete="off"></textarea>
+
+                <button class="icon-btn" id="send-btn">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </div>
+        </footer>
+
+        <div class="modal-overlay" id="bilanz-modal">
+            <div class="bottom-sheet">
+
+                <div class="drag-handle-container" id="btn-close-bilanz">
+                    <div class="drag-handle"></div>
+                </div>
+
+                <div class="sheet-slider" id="bilanz-slider" data-active-slide="0">
+                    <div class="sheet-slides">
+                        <div class="sheet-slide" id="bilanz-slide-main">
+                            <header class="sheet-header">
+                                <h1 class="app-title">Balance</h1>
+                            </header>
+                            <div class="sheet-content">
+                                <div class="balance-section">
+                                    <span class="card-label">Current Balance</span>
+                                    <h1 class="total-amount big-green" id="modal-balance-value">0.00€</h1>
+                                </div>
+                                <div class="options-list" style="margin-top: auto; padding-top: 24px;">
+                                    <button class="option-item btn-primary" id="btn-edit-balance">
+                                        <span class="option-text" style="color: #ffffff; text-align: center; width: 100%; font-weight: 600;">Edit Balance</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sheet-slide" id="bilanz-slide-edit">
+                            <header class="sheet-header">
+                                <h1 class="app-title">Edit Balance</h1>
+                            </header>
+                            <div class="sheet-content">
+                                <div class="balance-section">
+                                    <span class="card-label">New Balance (€)</span>
+                                    <input type="text" id="input-balance" class="edit-input" placeholder="e.g. 485.78" autocomplete="off">
+                                </div>
+                                <div class="options-list" style="margin-top: auto; padding-top: 24px;">
+                                    <button class="option-item btn-primary" id="btn-save-balance">
+                                        <span class="option-text" style="color: #ffffff; text-align: center; width: 100%; font-weight: 600;">Done</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-overlay" id="sparziele-modal">
+            <div class="bottom-sheet" style="height: 85%;">
+
+                <div class="drag-handle-container" id="btn-close-sparziele">
+                    <div class="drag-handle"></div>
+                </div>
+
+                <div class="sheet-slider" id="sparziele-slider" data-active-slide="0">
+                    <div class="sheet-slides">
+
+                        <div class="sheet-slide" id="sparziele-slide-main">
+                            <header class="sheet-header">
+                                <h1 class="app-title">Savings Goals</h1>
+                            </header>
+                            <div class="sheet-content">
+                                <div class="balance-section">
+                                    <span class="card-label">Total Savings Goal</span>
+                                    <h1 class="total-amount" id="total-goal-amount" style="color: #000000;">0.00€</h1>
+                                </div>
+                                <div class="goals-list" id="modal-goals-list">
+                                </div>
+                                <div class="options-list" style="margin-top: auto; padding-top: 24px;">
+                                    <button class="option-item btn-primary" id="btn-to-edit-goals">
+                                        <span class="option-text" style="color: #ffffff; text-align: center; width: 100%; font-weight: 600;">Edit Savings Goals</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sheet-slide" id="sparziele-slide-edit">
+                            <header class="sheet-header">
+                                <h1 class="app-title">Edit Savings Goals</h1>
+                            </header>
+                            <div class="sheet-content">
+                                <div class="goals-list" id="modal-goals-list-edit" style="gap: 16px;">
+                                </div>
+                                <div class="options-list" style="margin-top: auto; padding-top: 24px; display: flex; flex-direction: column; gap: 8px;">
+                                    <button class="option-item btn-primary" id="btn-to-add-goal">
+                                        <span class="option-text" style="color: #ffffff; text-align: center; width: 100%; font-weight: 600;">Add New Goal</span>
+                                    </button>
+                                    <button class="option-item btn-primary" id="btn-save-goals-edit">
+                                        <span class="option-text" style="color: #ffffff; text-align: center; width: 100%; font-weight: 600;">Done</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sheet-slide" id="sparziele-slide-add">
+                            <header class="sheet-header">
+                                <h1 class="app-title" id="add-goal-header-title">Add Goal</h1>
+                            </header>
+                            <div class="sheet-content">
+                                <div class="balance-section">
+                                    <span class="card-label">Goal Name</span>
+                                    <input type="text" id="input-goal-name" class="edit-input" placeholder="e.g. iPad Pro" autocomplete="off">
+                                </div>
+                                <div class="balance-section" style="margin-top: 16px;">
+                                    <span class="card-label">Amount (€)</span>
+                                    <input type="text" id="input-goal-price" class="edit-input" placeholder="e.g. 1049" autocomplete="off">
+                                </div>
+                                <div class="options-list" style="margin-top: auto; padding-top: 24px; gap: 12px;">
+                                    <button class="option-item btn-primary" id="btn-submit-goal">
+                                        <span class="option-text" id="btn-submit-goal-text" style="color: #ffffff; text-align: center; width: 100%; font-weight: 600;">Add</span>
+                                    </button>
+                                    <button class="option-item" id="btn-cancel-add-goal" style="justify-content: center;">
+                                        <span class="option-text" style="color: #888888; text-align: center; width: 100%;">Cancel</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="smart-modal">
+            <div class="bottom-sheet">
+
+                <div class="drag-handle-container" id="btn-close-smart">
+                    <div class="drag-handle"></div>
+                </div>
+
+                <header class="sheet-header">
+                    <h1 class="app-title">PiggiAI</h1>
+                </header>
+                <div class="sheet-content">
+                    <div class="ai-tips-section">
+                        <p class="smart-text" style="text-align: center; margin-top: 20px;">Coming soon...</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="einnahmen-modal">
+            <div class="bottom-sheet">
+
+                <div class="drag-handle-container" id="btn-close-einnahmen">
+                    <div class="drag-handle"></div>
+                </div>
+
+                <div class="sheet-slider" id="einnahmen-slider" data-active-slide="0">
+                    <div class="sheet-slides">
+
+                        <div class="sheet-slide" id="einnahmen-slide-main">
+                            <header class="sheet-header">
+                                <h1 class="app-title">Income</h1>
+                            </header>
+                            <div class="sheet-content">
+                                <div class="balance-section" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+                                    <div>
+                                        <span class="card-label">Total Income (Month)</span>
+                                        <h1 class="total-amount big-green" id="modal-income-value">+0.00€</h1>
+                                    </div>
+                                    <div id="income-circle" style="width: 50px; height: 50px; border-radius: 50%; background-color: #4a9e61; display: none;"></div>
+                                </div>
+                                <div class="income-list" id="modal-income-list">
+                                </div>
+                                <div class="options-list" style="margin-top: auto; padding-top: 24px;">
+                                    <button class="option-item btn-primary" id="btn-to-edit-income">
+                                        <span class="option-text" style="color: #ffffff; text-align: center; width: 100%; font-weight: 600;">Edit Income</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sheet-slide" id="einnahmen-slide-edit">
+                            <header class="sheet-header">
+                                <h1 class="app-title">Edit Income</h1>
+                            </header>
+                            <div class="sheet-content">
+                                <div class="income-list" id="modal-income-list-edit" style="gap: 16px;">
+                                </div>
+                                <div class="options-list" style="margin-top: auto; padding-top: 24px; display: flex; flex-direction: column; gap: 8px;">
+                                    <button class="option-item btn-primary" id="btn-to-add-income">
+                                        <span class="option-text" style="color: #ffffff; text-align: center; width: 100%; font-weight: 600;">Add New Income</span>
+                                    </button>
+                                    <button class="option-item btn-primary" id="btn-save-income-edit">
+                                        <span class="option-text" style="color: #ffffff; text-align: center; width: 100%; font-weight: 600;">Done</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sheet-slide" id="einnahmen-slide-add">
+                            <header class="sheet-header">
+                                <h1 class="app-title" id="add-income-header-title">Add Income</h1>
+                            </header>
+                            <div class="sheet-content">
+                                <div class="balance-section">
+                                    <span class="card-label">Income Name</span>
+                                    <input type="text" id="input-income-name" class="edit-input" placeholder="e.g. Job" autocomplete="off">
+                                </div>
+                                <div class="balance-section" style="margin-top: 16px;">
+                                    <span class="card-label">Amount (€)</span>
+                                    <input type="text" id="input-income-amount" class="edit-input" placeholder="e.g. 45" autocomplete="off">
+                                </div>
+                                <div class="options-list" style="margin-top: auto; padding-top: 24px; gap: 12px;">
+                                    <button class="option-item btn-primary" id="btn-submit-income">
+                                        <span class="option-text" id="btn-submit-income-text" style="color: #ffffff; text-align: center; width: 100%; font-weight: 600;">Add</span>
+                                    </button>
+                                    <button class="option-item" id="btn-cancel-add-income" style="justify-content: center;">
+                                        <span class="option-text" style="color: #888888; text-align: center; width: 100%;">Cancel</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="ausgaben-modal">
+            <div class="bottom-sheet">
+
+                <div class="drag-handle-container" id="btn-close-ausgaben">
+                    <div class="drag-handle"></div>
+                </div>
+
+                <div class="sheet-slider" id="ausgaben-slider" data-active-slide="0">
+                    <div class="sheet-slides">
+
+                        <div class="sheet-slide" id="ausgaben-slide-main">
+                            <header class="sheet-header">
+                                <h1 class="app-title">Expenses</h1>
+                            </header>
+                            <div class="sheet-content">
+                                <div class="balance-section" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+                                    <div>
+                                        <span class="card-label">Total Expenses (Month)</span>
+                                        <h1 class="total-amount" id="modal-expense-value" style="color: #d94141;">-0.00€</h1>
+                                    </div>
+                                </div>
+                                <div class="expense-list" id="modal-expense-list">
+                                </div>
+                                <div class="options-list" style="margin-top: auto; padding-top: 24px;">
+                                    <button class="option-item btn-primary" id="btn-to-edit-expense">
+                                        <span class="option-text" style="color: #ffffff; text-align: center; width: 100%; font-weight: 600;">Edit Expenses</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sheet-slide" id="ausgaben-slide-edit">
+                            <header class="sheet-header">
+                                <h1 class="app-title">Edit Expenses</h1>
+                            </header>
+                            <div class="sheet-content">
+                                <div class="expense-list" id="modal-expense-list-edit" style="gap: 16px;">
+                                </div>
+                                <div class="options-list" style="margin-top: auto; padding-top: 24px; display: flex; flex-direction: column; gap: 8px;">
+                                    <button class="option-item btn-primary" id="btn-to-add-expense">
+                                        <span class="option-text" style="color: #ffffff; text-align: center; width: 100%; font-weight: 600;">Add New Expense</span>
+                                    </button>
+                                    <button class="option-item btn-primary" id="btn-save-expense-edit">
+                                        <span class="option-text" style="color: #ffffff; text-align: center; width: 100%; font-weight: 600;">Done</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sheet-slide" id="ausgaben-slide-add">
+                            <header class="sheet-header">
+                                <h1 class="app-title" id="add-expense-header-title">Add Expense</h1>
+                            </header>
+                            <div class="sheet-content">
+                                <div class="balance-section">
+                                    <span class="card-label">Expense Name</span>
+                                    <input type="text" id="input-expense-name" class="edit-input" placeholder="e.g. Cinema" autocomplete="off">
+                                </div>
+                                <div class="balance-section" style="margin-top: 16px;">
+                                    <span class="card-label">Amount (€)</span>
+                                    <input type="text" id="input-expense-amount" class="edit-input" placeholder="e.g. 15" autocomplete="off">
+                                </div>
+                                <div class="options-list" style="margin-top: auto; padding-top: 24px; gap: 12px;">
+                                    <button class="option-item btn-primary" id="btn-submit-expense">
+                                        <span class="option-text" id="btn-submit-expense-text" style="color: #ffffff; text-align: center; width: 100%; font-weight: 600;">Add</span>
+                                    </button>
+                                    <button class="option-item" id="btn-cancel-add-expense" style="justify-content: center;">
+                                        <span class="option-text" style="color: #888888; text-align: center; width: 100%;">Cancel</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="profile-modal">
+            <div class="profile-popup">
+
+                <div class="sheet-slider" id="profile-slider" data-active-slide="0">
+                    <div class="sheet-slides">
+                        <div class="sheet-slide">
+                            <header class="popup-header">
+                                <h1 class="app-title">Settings</h1>
+                                <div class="profile-avatar" id="btn-close-profile" style="cursor: pointer;">M</div>
+                            </header>
+
+                            <div class="sheet-content" style="padding: 0;">
+                                <div class="options-list">
+                                    <button class="option-item" id="btn-to-view-mode">
+                                        <span class="option-text">Appearance</span>
+                                    </button>
+                                    <div class="card-divider"></div>
+                                    <button class="option-item" id="btn-to-api-key">
+                                        <span class="option-text">API Key</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sheet-slide">
+                            <header class="popup-header">
+                                <h1 class="app-title">Appearance</h1>
+                            </header>
+                            <div class="sheet-content" style="padding: 0;">
+                                <div class="options-list">
+                                    <button class="option-item" id="btn-light-mode">
+                                        <span class="option-text">Light Mode</span>
+                                    </button>
+                                    <div class="card-divider"></div>
+                                    <button class="option-item" id="btn-dark-mode">
+                                        <span class="option-text">Dark Mode</span>
+                                    </button>
+                                </div>
+                                <div class="options-list" style="margin-top: auto; padding-top: 24px;">
+                                    <button class="option-item btn-primary" id="btn-back-to-profile">
+                                        <span class="option-text" style="color: #ffffff; text-align: center; width: 100%; font-weight: 600;">Done</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sheet-slide">
+                            <header class="popup-header">
+                                <h1 class="app-title">API Key</h1>
+                            </header>
+                            <div class="sheet-content" style="padding: 16px 24px;">
+                                <p class="smart-text" style="text-align: center; margin-top: 20px;">Coming soon...</p>
+                                <div class="options-list" style="margin-top: auto; padding-top: 24px;">
+                                    <button class="option-item btn-primary" id="btn-back-to-profile-api">
+                                        <span class="option-text" style="color: #ffffff; text-align: center; width: 100%; font-weight: 600;">Done</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
