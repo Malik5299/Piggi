@@ -1,11 +1,12 @@
 # Piggy
 
 Piggy is a smart, AI-driven saving Assistant that runs entirely in your browser. <br>
-This is a prototype and I'm working on it, so it doesn't work completely.
+This is a prototype and I'm working on it, so it doesn't work completely. <br>
+Check my project out on Stardance: https://stardance.hackclub.com/@malikschenk/projects
 
 ### Features
 
-**PiggiAI:** Control your goals by natural language inputs via your Gemini API key <br>
+**PiggiAI:** Control your goals by natural language inputs via your Gemini API key (You get this key for free on https://aistudio.google.com/api-keys) <br>
 **Manual Control:** Add, edit or delete goals manually
 
 ### Privacy
