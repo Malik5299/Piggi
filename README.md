@@ -1,4 +1,4 @@
-#Piggy
+# Piggy
 
 Piggy is a smart, AI-driven saving Assistant that runs entirely in your browser.
 
