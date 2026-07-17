@@ -1,6 +1,7 @@
 # Piggy
 
-Piggy is a smart, AI-driven saving Assistant that runs entirely in your browser.
+Piggy is a smart, AI-driven saving Assistant that runs entirely in your browser. <br>
+This is a prototype and I'm working on it, so it doesn't work completely.
 
 ### Features
 
