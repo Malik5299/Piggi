@@ -2,7 +2,7 @@
 
 Piggy is a smart, AI-driven saving Assistant that runs entirely in your browser. <br>
 This is a prototype and I'm working on it, so it doesn't work completely. <br>
-Check my project out on Stardance: https://stardance.hackclub.com/@malikschenk/projects
+Check my project out on Stardance: stardance.hackclub.com/projects/33818
 
 ### Features
 
